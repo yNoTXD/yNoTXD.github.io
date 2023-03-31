@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="DMD直接成像光路：两块焦距分别为$f_1$和$f_2$的透镜共轴相隔$f_1+f_2$放置，物面(DMD)和像面(傅里叶面)分别置于第一块透镜前$f_1$处和第二块透镜后$f_2$处。 这里通常使用圆形小孔作为低通滤波器，将频谱中高频噪声滤掉，以在最终的像面上模糊 DMD 自身的像素化结构，使得目标势阱平滑。 $$U_{out}(x,y)&#x3D;\mathscr{F}^{-1}{\maths">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2023/03/13/03_DMD%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="DMD直接成像光路：两块焦距分别为$f_1$和$f_2$的透镜共轴相隔$f_1+f_2$放置，物面(DMD)和像面(傅里叶面)分别置于第一块透镜前$f_1$处和第二块透镜后$f_2$处。 这里通常使用圆形小孔作为低通滤波器，将频谱中高频噪声滤掉，以在最终的像面上模糊 DMD 自身的像素化结构，使得目标势阱平滑。 $$U_{out}(x,y)&#x3D;\mathscr{F}^{-1}{\maths">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-03-13T03:54:57.000Z">
+<meta property="article:modified_time" content="2023-03-13T03:54:57.000Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-03_DMD原理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/03/13/03_DMD%E5%8E%9F%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2023-03-13T03:54:57.000Z" itemprop="datePublished">2023-03-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="DMD直接成像光路："><a href="#DMD直接成像光路：" class="headerlink" title="DMD直接成像光路："></a>DMD直接成像光路：</h4><p><strong>两块焦距分别为$f_1$和$f_2$的透镜共轴相隔$f_1+f_2$放置，物面(DMD)和像面(傅里叶面)分别置于第一块透镜前$f_1$处和第二块透镜后$f_2$处。</strong></p>
+<p>这里通常使用圆形小孔作为低通滤波器，将频谱中高频噪声滤掉，以在最终的像面上模糊 DMD 自身的像素化结构，使得目标势阱平滑。</p>
+<p>$$U_{out}(x,y)&#x3D;\mathscr{F}^{-1}{\mathscr{F}{U_{in}(x,y)\cdot DMD(x,y)}h(\nu_x,\nu_y)}$$</p>
+<p>​                    $$\Downarrow$$ 傅里叶光学卷积理论</p>
+<p>$$U_{out}(x,y)&#x3D;[U_{in}(x,y)\cdot DMD(x,y)]\otimes\mathscr{F}^{-1}{h(\nu_x,\nu_y)}$$</p>
+<p><strong>对DMD的二值化进行编码：</strong></p>
+<p>$$SLM(x,y)&#x3D;\sqrt{\frac{I_{out}(x,y)}{I_{in}(x,y)}}$$</p>
+<p>将$SLM(x,y)$编码得到$DMD(x,y)$，首先将$SLM(x,y)$归一化得到$SLM_{norm}(x,y)$，根据一定的比例和$SLM_{norm}(x,y)$的值，还有邻近几个点的误差权重得到$DMD(x,y)$的分布。</p>
+<p>如：</p>
+<p>$$r_{bin}(x,y)&#x3D;\begin{cases}1, r(x,y)&gt;0.5+f_{rand}()\0, otherwise\end{cases}$$</p>
+<p>$f_{rand}()$：随机数发生器，产生$\pm0.5$的数</p>
+<p><strong>圆形小孔滤波器孔径的选择</strong></p>
+<p>在该方法的实际使用中，一般需要根据特定的目标势阱形状（特别是其中高频细节的多少）来选择合适的滤波孔径。一个简便的做法是<strong>使用 MATLAB 对不同孔径下的成像效果进行穷举式扫描，以获得较优解</strong>。</p>
+<h4 id="衍射光的傅里叶变换方法"><a href="#衍射光的傅里叶变换方法" class="headerlink" title="衍射光的傅里叶变换方法"></a>衍射光的傅里叶变换方法</h4><p>由于 DMD 具有规则的像素化结构且所有像素有统一的偏转角度，也发展出<strong>利用其衍射光来进行更多自由度的振幅甚至相位调制</strong>的使用方法。</p>
+<p>虽然DMD的每个像素只能处于这两种状态中的一种，但我们可以通过对每个格点使用多个像素来实现灰度图像。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/03/13/03_DMD%E5%8E%9F%E7%90%86/" data-id="clfwu67bs000044ky0i9f3p2c" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/03/31/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/03/31/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/13/03_DMD%E5%8E%9F%E7%90%86/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
